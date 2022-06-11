@@ -1,90 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
-
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,height=device-height">
-    <title>多色南丁格尔玫瑰图</title>
-    <script defer src="my-charts.dart.js"></script>
-    <style>
-      ::-webkit-scrollbar {
-        display: none;
+    <title>零钱管家 APP 收支占比趋势分析</title>
+    <script defer src="my-antv.dart.js"></script>
+    <style>::-webkit-scrollbar{display:none;}html,body{overflow:hidden;height:100%;margin:0;}</style>
+</head>
+<body>
+<div id="mountNode"></div>
+<script>/*Fixing iframe window.innerHeight 0 issue in Safari*/document.body.clientHeight;</script>
+<script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.g2-3.5.1/dist/g2.min.js"></script>
+<script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.data-set-0.10.1/dist/data-set.min.js"></script>
+<script src="https://gw.alipayobjects.com/os/antv/assets/lib/jquery-3.2.1.min.js"></script>
+<script>
+  var data = [{
+    time: '03-19',
+    type: '101-1000',
+    value: 32000
+  }, {
+    time: '03-19',
+    type: '31-100',
+    value: 30000
+  }, {
+    time: '03-19',
+    type: '11-30',
+    value: 27000
+  }, {
+    time: '03-19',
+    type: '1-10',
+    value: 24000
+  }, {
+    time: '03-20',
+    type: '101-1000',
+    value: 35000
+  }, {
+    time: '03-20',
+    type: '31-100',
+    value: 32000
+  }, {
+    time: '03-20',
+    type: '11-30',
+    value: 30000
+  }, {
+    time: '03-20',
+    type: '1-10',
+    value: 27000
+  }, {
+    time: '03-21',
+    type: '101-1000',
+    value: 39000
+  }, {
+    time: '03-21',
+    type: '31-100',
+    value: 37000
+  }, {
+    time: '03-21',
+    type: '11-30',
+    value: 34000
+  }, {
+    time: '03-21',
+    type: '1-10',
+    value: 30000
+  }, {
+    time: '03-22',
+    type: '101-1000',
+    value: 44000
+  }, {
+    time: '03-22',
+    type: '31-100',
+    value: 42000
+  }, {
+    time: '03-22',
+    type: '11-30',
+    value: 38000
+  }, {
+    time: '03-22',
+    type: '1-10',
+    value: 34000
+  }, {
+    time: '03-23',
+    type: '101-1000',
+    value: 47000
+  }, {
+    time: '03-23',
+    type: '31-100',
+    value: 44000
+  }, {
+    time: '03-23',
+    type: '11-30',
+    value: 40000
+  }, {
+    time: '03-23',
+    type: '1-10',
+    value: 36000
+  }, {
+    time: '03-24',
+    type: '101-1000',
+    value: 48000
+  }, {
+    time: '03-24',
+    type: '31-100',
+    value: 46000
+  }, {
+    time: '03-24',
+    type: '11-30',
+    value: 42000
+  }, {
+    time: '03-24',
+    type: '1-10',
+    value: 38000
+  }, {
+    time: '03-25',
+    type: '101-1000',
+    value: 50000
+  }, {
+    time: '03-25',
+    type: '31-100',
+    value: 48000
+  }, {
+    time: '03-25',
+    type: '11-30',
+    value: 44000
+  }, {
+    time: '03-25',
+    type: '1-10',
+    value: 38000
+  }];
+
+  var chart = new G2.Chart({
+    container: 'mountNode',
+    forceFit: true,
+    height: window.innerHeight,
+    padding: [20, 70, 50, 50]
+  });
+  chart.source(data);
+  chart.scale('value', {
+    alias: '金额(元)'
+  });
+  chart.axis('time', {
+    label: {
+      textStyle: {
+        fill: '#aaaaaa'
       }
+    },
+    tickLine: {
+      alignWithLabel: false,
+      length: 0
+    }
+  });
 
-      html,
-      body {
-        overflow: hidden;
-        height: 100%;
-        margin: 0;
+  chart.axis('value', {
+    label: {
+      textStyle: {
+        fill: '#aaaaaa'
+      },
+      formatter: function formatter(text) {
+        return text.replace(/(\d)(?=(?:\d{3})+$)/g, '$1,');
       }
-    </style>
-  </head>
-
-  <body>
-    <div id="dart-status">No Dart</div>
-
-    <div id="mountNode"></div>
-    <script>/*Fixing iframe window.innerHeight 0 issue in Safari*/document.body.clientHeight;</script>
-    <script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.g2-3.5.1/dist/g2.min.js"></script>
-    <script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.data-set-0.10.1/dist/data-set.min.js"></script>
-    <script>
-      var data = [{
-        year: '2001',
-        population: 41.8
-      }, {
-        year: '2002',
-        population: 38
-      }, {
-        year: '2003',
-        population: 33.7
-      }, {
-        year: '2004',
-        population: 30.7
-      }, {
-        year: '2005',
-        population: 25.8
-      }, {
-        year: '2006',
-        population: 31.7
-      }, {
-        year: '2007',
-        population: 33
-      }, {
-        year: '2008',
-        population: 46
-      }, {
-        year: '2009',
-        population: 38.3
-      }, {
-        year: '2010',
-        population: 28
-      }, {
-        year: '2011',
-        population: 42.5
-      }, {
-        year: '2012',
-        population: 30.3
-      }];
-
-      var chart = new G2.Chart({
-        container: 'mountNode',
-        forceFit: true,
-        height: window.innerHeight
-      });
-      chart.source(data);
-      chart.coord('polar');
-      chart.legend({
-        position: 'right',
-        offsetY: -window.innerHeight / 2 + 180,
-        offsetX: -140
-      });
-      chart.axis(false);
-      chart.interval().position('year*population').color('year', G2.Global.colors_pie_16).style({
-        lineWidth: 1,
-        stroke: '#fff'
-      });
-      chart.render();
-    </script>
-  </body>
-
+    },
+    title: {
+      offset: 80
+    }
+  });
+  chart.legend({
+    position: 'right-center'
+  });
+  chart.interval().position('time*value').color('type', ['#40a9ff', '#1890ff', '#096dd9', '#0050b3']).opacity(1);
+  chart.render();
+</script></body>
 </html>
